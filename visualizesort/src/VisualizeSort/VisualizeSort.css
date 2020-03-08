@@ -1,0 +1,41 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+h3{
+    color: darkgreen;
+    font-size: 30px;
+    margin: 10px 0px;
+}
+
+.Navbar{
+    display: inline-flex;
+    margin: auto;
+    background-color: limegreen;
+    width: 100vw;
+    height: 50px;
+}
+
+
+.Navbar h6{
+    font-size: 20px;
+    color: white;
+    margin:10px 50px;
+}
+
+
+
+.Navbar button{
+    background:none;
+    border: none;
+    color:white;
+    font-size: 15px;
+    margin:10px 40px 10px 20px;
+    outline: none;
+}
+
+.Navbar button :hover
+{
+    color:black;
+}
