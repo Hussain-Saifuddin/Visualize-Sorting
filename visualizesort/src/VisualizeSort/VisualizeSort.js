@@ -1,74 +1,77 @@
-import React, { Component } from 'react';
-import { render } from '@testing-library/react';
-import '../VisualizeSort/VisualizeSort.css'
+import React from 'react';
+import '../VisualizeSort/VisualizeSort.css';
 
-export default class VisualizeSort extends Component
+export default class VisualizeSort extends React.Component
 {
+
     constructor(props)
     {
         super(props);
-        this.state = { array : []};
+        this.state={
+            array : []
+        };
     }
 
-    //componentDidMount()
-    //{
-     //   this.genarray();
-   // }
+    componentDidMount()
+    {
+        this.newArray();
+    }
+
+    newArray = () =>
+    {
+        const arr = [];
+        for(let i=0;i<(window.innerWidth/5);i++)
+        {
+            arr.push(Math.floor(10 + Math.random() * ((window.innerHeight-130) - 10)));
+        }
+        this.setState({array : arr});
+    }
+
+    
+    bubble = () =>
+    {
+        const {array} = this.state;
+        console.log(array);
+        for(let i =0 ;i<array.length;i++)
+        {
+            for(let j =0;j<array.length;j++)
+            {
+                if(array[j] > array[j+1])
+                {
+                    const temp = array[j];
+                    array[j] = array[j+1];
+                    array[j+1] = temp;
+                    this.setState({array : array});
+                }
+            }
+        }
+    }
+
     render()
     {
+        const {array} = this.state;
         return(
-            <div>
-                <h3>Sorting Algorithm Visualization.</h3>
-                <div className = "Navbar">
-                    <h6>Select Sorting Algorithm</h6>
-                    <button onClick={this.bubble}>Bubble Sort</button>
-                    <button onClick={this.insertion}>Insertion Sort</button>
-                    <button onClick={this.selection}>Selection Sort</button>
-                    <button onClick={this.quick}>Quick Sort</button>
-                    <button onClick={this.merge}>Merge Sort</button>
-                    <button onClick={this.genarray}>Generate New Array</button>
-
-
+            
+            <div className="wrapper">
+                <div className="Heading"><h1>Visualization of Sorting Algorithm</h1></div>
+                <div className="Navbar">
+                    <h4>Select An Algorithm</h4>
+                    <div className="buttons">
+                        <button onClick={this.merge}>Merge</button>
+                        <button onClick={this.insertion}>Insertion</button>
+                        <button onClick={this.bubble}>Bubble</button>
+                        <button>Selection</button>
+                        <button>Quick</button>
+                        <button onClick={this.newArray}>New Array</button>
+                    </div>
                 </div>
+                <div className="wrapper1">
+                    {array.map((value,idx) => (
+                        <div className="bars" key={idx} style = {{height:`${value}px`}}></div>
+                    ))}
+                </div>
+                
             </div>
         );
     }
-
-    genarray = ()=>
-    {
-        this.state.array.length = 0;
-        console.log(this.state.array);
-        for(let i=0;i<100;i++)
-        {
-            this.state.array.push(100);
-        }
-        console.log(this.state.array);
-        console.log(this.state.array.length);
-    }
-
-    bubble = ()=>
-    {
-
-    }
-
-    insertion = ()=>
-    {
-
-    }
-
-    quick = ()=>
-    {
-
-    }
-
-    merge = ()=>
-    {
-
-    }
-
-    selection = ()=>
-    {
-
-    }
-    
 }
