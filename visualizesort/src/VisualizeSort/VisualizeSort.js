@@ -16,7 +16,7 @@ export default class VisualizeSort extends React.Component
     componentDidMount()
     {
         this.newArray();
-        
+        clearTimeout(this.state.start);
         
     }
 
@@ -33,6 +33,7 @@ export default class VisualizeSort extends React.Component
 
     bubble = () =>
     {
+        clearTimeout(this.state.start);
         let i = -1;
         this.state.start = setInterval(() => {
             
@@ -52,6 +53,7 @@ export default class VisualizeSort extends React.Component
                 }  
             }
             }, 1*0.25);
+        
     }
     
     
