@@ -1,51 +1,60 @@
 import React from 'react';
 import '../VisualizeSort/VisualizeSort.css';
+import {BubbleSort} from './Sorting';
 
 export default class VisualizeSort extends React.Component
-{
-
+{ 
     constructor(props)
     {
         super(props);
         this.state={
-            array : []
+            array : [],
+            start : 0,
         };
     }
 
     componentDidMount()
     {
         this.newArray();
+        
+        
     }
 
     newArray = () =>
     {
+        clearTimeout(this.state.start);
         const arr = [];
         for(let i=0;i<(window.innerWidth/5);i++)
         {
-            arr.push(Math.floor(10 + Math.random() * ((window.innerHeight-130) - 10)));
+            arr.push(Math.floor(10 + Math.random() * ((window.innerHeight-130) - 10)));            
         }
         this.setState({array : arr});
     }
 
-    
     bubble = () =>
     {
-        const {array} = this.state;
-        console.log(array);
-        for(let i =0 ;i<array.length;i++)
-        {
-            for(let j =0;j<array.length;j++)
+        let i = -1;
+        this.state.start = setInterval(() => {
+            
+            let j = 0;
+            let temp = 0;
+            const array1 = this.state.array;
+            for(i=0;i !== this.state.array.length-2;i++)
             {
-                if(array[j] > array[j+1])
+                const array = BubbleSort(this.state.array);
+                while(j < array.length-1)
                 {
-                    const temp = array[j];
-                    array[j] = array[j+1];
-                    array[j+1] = temp;
-                    this.setState({array : array});
-                }
+                    temp = array1[array[j]];
+                    array1[array[j]] = array1[array[j+1]];
+                    array1[array[j+1]] = temp;  
+                    this.setState({array : array1});
+                    j=j+2; 
+                }  
             }
-        }
+            }, 1*0.25);
     }
+    
+    
 
     render()
     {
